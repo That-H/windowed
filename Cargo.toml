@@ -1,6 +1,8 @@
 [package]
 name = "windowed"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
+repository = "https://github.com/That-H/windowed"
 
 [dependencies]
+point = { git = "https://github.com/That-H/point/", tag = "0.6.1" }
