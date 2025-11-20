@@ -138,4 +138,41 @@ impl<T: fmt::Display> Container<T> {
             println!();
         }
     }
+	
+	/// Creates a string representation of the container with positions from (0, 0) to
+	/// (wid, hgt), using the provided default when there is no stored value in the
+	/// buffer.
+	pub fn to_string_with_default(&self, wid: u16, hgt: u16, default: T) -> String
+	where T: Clone
+	{
+		let mut out = String::new();
+		let wid = wid as i32;
+        let hgt = hgt as i32;
+       
+        for y in 0..hgt {
+            for x in 0..wid {
+                let p = Point::new(x, y);
+                
+                let ch = if let Some(c) = self.buffer.get(&p) {
+					c.clone()
+				} else {
+					default.clone()
+				};
+				
+				out.push_str(&ch.to_string());
+            }
+            out.push('\n');
+        }
+		
+		out
+	}
+	
+	/// Creates a string representation of the container with positions from (0, 0) to
+	/// (wid, hgt), using the default value of T when there is no stored value in the
+	/// buffer.
+	pub fn to_string(&self, wid: u16, hgt: u16) -> String
+	where T: Clone + Default
+	{
+		self.to_string_with_default(wid, hgt, T::default())
+	}
 }
