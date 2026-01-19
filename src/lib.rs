@@ -76,7 +76,7 @@ impl fmt::Write for Window<char> {
 }
 
 /// Contains various windows and displays them according to their position.
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default)]
 pub struct Container<T: fmt::Display> {
     /// Each window stored in the container.
     pub windows: Vec<Window<T>>,
